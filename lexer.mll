@@ -13,6 +13,7 @@ rule read_token = parse
 | [' ' '\t']+ { read_token lexbuf }
 | newline { Lexing.new_line lexbuf; read_token lexbuf }
 
+| "=" { EQUAL }
 | "+" { PLUS }
 | "(" { LPAR }
 | ")" { RPAR }
@@ -21,6 +22,10 @@ rule read_token = parse
 | "begin" { BEGIN }
 | "end" { END }
 | "return" { RETURN }
+| "if" { IF }
+| "then" { THEN }
+| "else" { ELSE }
+
 
 | symbol { SYMBOL (Lexing.lexeme lexbuf) }
 | number { NUMBER (Lexing.lexeme lexbuf) }

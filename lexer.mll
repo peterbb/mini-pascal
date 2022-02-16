@@ -12,10 +12,16 @@ let number = digit+
 rule read_token = parse
 | [' ' '\t']+ { read_token lexbuf }
 | newline { Lexing.new_line lexbuf; read_token lexbuf }
+
+| "+" { PLUS }
+| "(" { LPAR }
+| ")" { RPAR }
+
 | "procedure" { PROCEDURE }
 | "begin" { BEGIN }
 | "end" { END }
 | "return" { RETURN }
+
 | symbol { SYMBOL (Lexing.lexeme lexbuf) }
 | number { NUMBER (Lexing.lexeme lexbuf) }
 | eof { EOF }

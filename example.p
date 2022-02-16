@@ -1,5 +1,5 @@
 
 procedure _main
 begin
-    return 42
+    return 0 + 42
 end

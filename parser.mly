@@ -1,9 +1,9 @@
 
 %token <string> SYMBOL
 %token <string> NUMBER
-%token IF THEN ELSE LET BEGIN END PROCEDURE RETURN
+%token IF THEN ELSE LET BEGIN END PROCEDURE RETURN WHILE DO
 %token LPAR RPAR 
-%token PLUS EQUAL ASSIGN
+%token PLUS EQUAL ASSIGN LESS
 %token EOF
 
 %start <string * Ast.stmt> program
@@ -25,10 +25,14 @@ stmt:
         { Ast.Return expr }
     | IF; e=expr; THEN; s0=stmt; ELSE; s1=stmt; END; k=stmt?
         { Ast.If (e, s0, s1, k) }
+    | WHILE; e=expr; DO s=stmt; END; k=stmt?
+        { Ast.While (e, s, k) }
 
 expr:
     | e0 = expr_1; EQUAL; e1 = expr_1
         { Ast.Equal (e0, e1) }
+    | e0 = expr_1; LESS; e1 = expr_1
+        { Ast.Less (e0, e1) }
     | e = expr_1
         { e }
 

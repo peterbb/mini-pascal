@@ -14,6 +14,7 @@ rule read_token = parse
 | newline { Lexing.new_line lexbuf; read_token lexbuf }
 
 | "=" { EQUAL }
+| "<" { LESS }
 | "+" { PLUS }
 | ":=" { ASSIGN }
 
@@ -27,6 +28,8 @@ rule read_token = parse
 | "if" { IF }
 | "then" { THEN }
 | "else" { ELSE }
+| "while" { WHILE }
+| "do" { DO }
 | "let" { LET }
 
 

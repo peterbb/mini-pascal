@@ -15,6 +15,8 @@ rule read_token = parse
 
 | "=" { EQUAL }
 | "+" { PLUS }
+| ":=" { ASSIGN }
+
 | "(" { LPAR }
 | ")" { RPAR }
 
@@ -25,6 +27,7 @@ rule read_token = parse
 | "if" { IF }
 | "then" { THEN }
 | "else" { ELSE }
+| "let" { LET }
 
 
 | symbol { SYMBOL (Lexing.lexeme lexbuf) }
